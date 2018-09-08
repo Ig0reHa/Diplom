@@ -183,15 +183,22 @@ window.addEventListener('DOMContentLoaded', () => {
 				realImg[i].classList.add('animated', 'fadeIn');
 			}
 
-			// Не работает
+			sizes.onclick = (event) => {
+				if (!isRealImg(event)) {
+					for (let i = 0; i < realImg.length; i++) {
+						realImg[i].style.display = 'none';
+					}
+				}
+			}
 
-			// sizes.onclick = (event) => {
-			// 	if (event.target == realImg[i]) {
-			// 		for(let i = 0; i < imgBlock.length; i++ ) {
-			// 			realImg[i].style.display = 'none';
-			// 		}
-			// 	}
-			// }
+			function isRealImg(event) {
+				for (let i = 0; i < realImg.length; i++) {
+					if (event.target.tagName == 'IMG' || event.target.tagName == 'P') {
+						return true;
+					}
+				}
+				return false;
+			}
 		}
 	}
 
