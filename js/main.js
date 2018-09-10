@@ -301,10 +301,74 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
+	// Верхний слайдер
+
+
+	function Carousel1(setting) {
+		if(document.querySelector(setting.wrap) === null) {
+			console.error(`Carousel not fount selector ${setting.wrap}`);
+			return;
+		}
+
+		let privates = {};
+
+
+		this.prev_slide = () => {
+			--privates.opt.position;
+
+			if(privates.opt.position < 0) {
+				privates.sel.wrap.classList.add('s-notransition');
+				privates.opt.position = privates.opt.max_position - 1;
+			}
+
+			privates.sel.wrap.style["transform"] = `translateY(-${privates.opt.position}00%)`;
+		};
+
+
+
+		this.next_slide = () => {
+			++privates.opt.position;
+
+			if(privates.opt.position >= privates.opt.max_position) {
+				privates.opt.position = 0;
+			}
+
+			privates.sel.wrap.style["transform"] = `translateY(-${privates.opt.position}00%)`;
+		};
+
+		setInterval(this.next_slide, 10000);
+
+
+		privates.setting = setting;
+
+		privates.sel = {
+			"main": document.querySelector(privates.setting.main),
+			"wrap": document.querySelector(privates.setting.wrap),
+			"children": document.querySelector(privates.setting.wrap).children,
+			"prev": document.querySelector(privates.setting.prev),
+		};
+
+		privates.opt = {
+			"position": 0,
+			"max_position": document.querySelector(privates.setting.wrap).children.length
+		};
+
+	}
+
+	let topCarousel = new Carousel1({
+		"main": ".main-slider",
+		"wrap": ".main-slider-wrapper"
+	});
+
+
+
+
+
+
 	// Нижний слайдер
 
 
-	function Carousel(setting) {
+	function Carousel2(setting) {
 		if(document.querySelector(setting.wrap) === null) {
 			console.error(`Carousel not fount selector ${setting.wrap}`);
 			return;
@@ -367,7 +431,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-	let a = new Carousel({
+	let bottomCarousel = new Carousel2({
 		"main": ".feedback-slider",
 		"wrap": ".feedback-wrapper",
 		"prev": ".main-prev-btn",
