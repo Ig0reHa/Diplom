@@ -439,4 +439,50 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 
+
+
+	// Фильтрация блоков
+
+	let allWorks = document.getElementsByClassName('all'),
+		portfolioMenu = document.getElementsByClassName('portfolio-menu')[0],
+		noPortfolio = document.getElementsByClassName('portfolio-no')[0];
+
+	allWorks.onclick = () => {
+		for (let i = 1; i < allWorks.length; i++) {
+			allWorks.style.display = 'block';
+		}
+	}
+
+	portfolioMenu.onclick = (event) => {
+		let nameOfClass = event.target.className;
+		activeEl = document.getElementsByClassName(nameOfClass);
+		noPortfolio.style.display = 'none';
+
+		for ( let i = 1; i < allWorks.length; i++) {
+			allWorks[i].style.display = 'none';
+		}
+
+		for ( let i = 0; i < 7; i++) {
+			portfolioMenu.children[i].classList.remove('active');
+		}
+	
+		for ( let i = 0; i < activeEl.length; i++ ) {
+			activeEl[0].classList.add('active');
+			activeEl[i].style.display = 'block';
+			activeEl[i].classList.add('animated', 'zoomIn');
+			activeEl[0].classList.remove('animated', 'zoomIn');
+		}
+
+		if (activeEl.length == 1) {
+			noPortfolio.style.display = 'block';
+			noPortfolio.classList.add('animated', 'fadeIn');
+		} else if (activeEl.length == 0) {
+			allWorks[0].classList.add('active');
+			for (let i = 1; i < allWorks.length; i++) {
+				allWorks[i].style.display = 'block';
+			}
+		}
+	}
+
+
 });
