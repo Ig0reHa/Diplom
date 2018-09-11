@@ -505,4 +505,104 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 
+
+
+	// Главная форма
+
+	let message = new Object();
+	message.loading = "Загрузка...";
+	message.success = "Форма успешно отправлена!";
+	message.failure = "Что то пошло не так...";
+
+	let form = document.getElementsByClassName('bottom-form')[0],
+		input = form.getElementsByClassName('main-form-input'),
+		statusMessage = document.createElement('div');
+	
+
+	form.addEventListener('submit', function(event) {
+		statusMessage.classList.add('status');
+		event.preventDefault();
+		form.appendChild(statusMessage);
+
+		// AJAX
+		let request = new XMLHttpRequest();
+		request.open("POST", 'server.php');
+
+		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		
+		let formData = new FormData(form);
+
+		request.send(formData);
+
+		request.onreadystatechange = function() {
+			if (request.readyState < 4) {
+				statusMessage.innerHTML = message.loading;
+			} else if (request.readyState === 4) {
+				if (request.status === 200 && request.status < 300) {
+					statusMessage.innerHTML = message.success;
+					statusMessage.style.color = '#2ecc71';
+				}
+			} else {
+				statusMessage.innerHTML = message.failure;
+				statusMessage.style.color = '#e74c3c';
+			}
+		}
+
+		for ( let i = 0; i < input.length; i++) {
+			input[i].value = "";
+			// Очистка полей ввода
+		}
+	});
+
+
+	// Маска номера телефона
+
+	function setCursorPosition(pos, elem) {
+	    elem.focus();
+	    if (elem.setSelectionRange) elem.setSelectionRange(pos, pos);
+	    else if (elem.createTextRange) {
+	        let range = elem.createTextRange();
+	        range.collapse(true);
+	        range.moveEnd("character", pos);
+	        range.moveStart("character", pos);
+	        range.select()
+	    }
+	}
+
+	function mask(event) {
+	    let matrix = "+38-(___)-___-____",
+	        i = 0,
+	        def = matrix.replace(/\D/g, ""),
+	        val = this.value.replace(/\D/g, "");
+	    if (def.length >= val.length) val = def;
+	    this.value = matrix.replace(/./g, function(a) {
+	        return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a
+	    });
+	    if (event.type == "blur") {
+	        if (this.value.length == 2) this.value = ""
+	    } else setCursorPosition(this.value.length, this)
+	};
+
+    let phoneMask = document.querySelector("#phone-mask");
+    phoneMask.addEventListener("input", mask, false);
+    phoneMask.addEventListener("focus", mask, false);
+    phoneMask.addEventListener("blur", mask, false);
+
+    
+
+    // Можно ввести только русские буквы
+
+    let inputRu = document.getElementsByClassName('input-ru');
+
+    for ( let i = 0; i < inputRu.length; i++) {
+	    inputRu[i].addEventListener('keypress', () => {
+			setTimeout(function() {
+		        var res = /[^а-я А-Я ]/g.exec(inputRu[i].value);
+		        inputRu[i].value = inputRu[i].value.replace(res, '');
+		    }, 0);
+		});
+	}
+
+
+
 });
