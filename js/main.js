@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', function() {
 
 	let modalIsOpen = false;
 		modalWasOpened = false;
