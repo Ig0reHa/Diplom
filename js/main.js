@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
 
 	let modalIsOpen = false;
+		modalWasOpened = false;
 
 	// GIFT POPUP
 
@@ -14,6 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		popupGift.classList.add('animated', 'fadeIn');
 		gift.remove();
 		modalIsOpen = true;
+		modalWasOpened = true;
 	});
 
 	popupGiftClose.addEventListener('click', () => {
@@ -40,6 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			popupDesign.style.display = 'block';
 			popupDesign.classList.add('animated', 'fadeIn');
 			modalIsOpen = true;
+			modalWasOpened = true;
 		});
 	}
 
@@ -65,6 +68,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			popupConsultation.style.display = 'block';
 			popupConsultation.classList.add('animated', 'fadeIn');
 			modalIsOpen = true;
+			modalWasOpened = true;
 		});
 	}
 
@@ -84,6 +88,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			popupConsultation.classList.remove('fadeOut');
 			popupConsultation.style.display = 'block';
 			popupConsultation.classList.add('animated', 'fadeIn');
+			modalWasOpened = true;
 		}
 	}, 60000);
 
@@ -481,6 +486,21 @@ window.addEventListener('DOMContentLoaded', () => {
 			for (let i = 1; i < allWorks.length; i++) {
 				allWorks[i].style.display = 'block';
 			}
+		}
+	}
+
+
+
+
+	// Модальное окно при пролистывании
+	
+	body.onscroll = () => {
+		if ( modalWasOpened == false && document.body.scrollHeight == window.pageYOffset + window.innerHeight ) {
+			popupGift.classList.remove('fadeOut');
+			popupGift.style.display = 'block';
+			popupGift.classList.add('animated', 'fadeIn');
+			gift.remove();
+			modalWasOpened = true;
 		}
 	}
 
