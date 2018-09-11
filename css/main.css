@@ -1793,3 +1793,9 @@ h4 {
   text-align: center;
   font-size: 35px;
 }
+
+.status-small {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 25px;
+}

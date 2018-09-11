@@ -515,7 +515,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	message.failure = "Что то пошло не так...";
 
 	let form = document.getElementsByClassName('bottom-form')[0],
-		input = form.getElementsByClassName('main-form-input'),
+		input = form.getElementsByClassName('consult-form'),
 		statusMessage = document.createElement('div');
 	
 
@@ -555,7 +555,98 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 
-	// Маска номера телефона
+	
+
+
+	// Форма обратного звонка
+
+	let form1 = document.getElementsByClassName('callForm')[0],
+		input1 = form1.getElementsByClassName('callInput'),
+		statusMessage1 = document.createElement('div');
+	
+
+	form1.addEventListener('submit', function(event) {
+		statusMessage1.classList.add('status-small');
+		event.preventDefault();
+		form1.appendChild(statusMessage1);
+
+		// AJAX
+		let request = new XMLHttpRequest();
+		request.open("POST", 'server.php');
+
+		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	
+		let formData = new FormData(form1);
+
+		request.send(formData);
+
+		request.onreadystatechange = function() {
+			if (request.readyState < 4) {
+				statusMessage1.innerHTML = message.loading;
+			} else if (request.readyState === 4) {
+				if (request.status === 200 && request.status < 300) {
+					statusMessage1.innerHTML = message.success;
+					statusMessage1.style.color = '#2ecc71';
+				}
+			} else {
+				statusMessage1.innerHTML = message.failure;
+				statusMessage1.style.color = '#e74c3c';
+			}
+		}
+
+		for ( let i = 0; i < input1.length; i++) {
+			input1[i].value = "";
+			// Очистка полей ввода
+		}
+	});
+
+
+
+	// Форма заказать дизайн портрета
+
+	let form2 = document.getElementsByClassName('design-form')[0],
+		input2 = form2.getElementsByClassName('design-input'),
+		statusMessage2 = document.createElement('div');
+	
+
+	form2.addEventListener('submit', function(event) {
+		statusMessage2.classList.add('status-small');
+		event.preventDefault();
+		form2.appendChild(statusMessage2);
+
+		// AJAX
+		let request = new XMLHttpRequest();
+		request.open("POST", 'server.php');
+
+		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	
+		let formData = new FormData(form2);
+
+		request.send(formData);
+
+		request.onreadystatechange = function() {
+			if (request.readyState < 4) {
+				statusMessage2.innerHTML = message.loading;
+			} else if (request.readyState === 4) {
+				if (request.status === 200 && request.status < 300) {
+					statusMessage2.innerHTML = message.success;
+					statusMessage2.style.color = '#2ecc71';
+				}
+			} else {
+				statusMessage2.innerHTML = message.failure;
+				statusMessage2.style.color = '#e74c3c';
+			}
+		}
+
+		for ( let i = 0; i < input2.length; i++) {
+			input2[i].value = "";
+			// Очистка полей ввода
+		}
+	});
+
+
+
+    // Маска номера телефона
 
 	function setCursorPosition(pos, elem) {
 	    elem.focus();
@@ -583,11 +674,13 @@ window.addEventListener('DOMContentLoaded', () => {
 	    } else setCursorPosition(this.value.length, this)
 	};
 
-    let phoneMask = document.querySelector("#phone-mask");
-    phoneMask.addEventListener("input", mask, false);
-    phoneMask.addEventListener("focus", mask, false);
-    phoneMask.addEventListener("blur", mask, false);
+    let phoneMask = document.getElementsByClassName("phone-mask");
 
+    for ( let i = 0; i < phoneMask.length; i++) {
+    	phoneMask[i].addEventListener("input", mask, false);
+    	phoneMask[i].addEventListener("focus", mask, false);
+    	phoneMask[i].addEventListener("blur", mask, false);
+    }
     
 
     // Можно ввести только русские буквы
@@ -602,7 +695,6 @@ window.addEventListener('DOMContentLoaded', () => {
 		    }, 0);
 		});
 	}
-
 
 
 });
