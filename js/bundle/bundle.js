@@ -208,14 +208,23 @@ function forms() {
 		request.onreadystatechange = function () {
 			if (request.readyState < 4) {
 				statusMessage.innerHTML = message.loading;
+				setTimeout(function () {
+					statusMessage.style.display = 'none';
+				}, 5000);
 			} else if (request.readyState === 4) {
 				if (request.status === 200 && request.status < 300) {
 					statusMessage.innerHTML = message.success;
 					statusMessage.style.color = '#2ecc71';
+					setTimeout(function () {
+						statusMessage.style.display = 'none';
+					}, 5000);
 				}
 			} else {
 				statusMessage.innerHTML = message.failure;
 				statusMessage.style.color = '#e74c3c';
+				setTimeout(function () {
+					statusMessage.style.display = 'none';
+				}, 5000);
 			}
 		};
 
@@ -249,14 +258,23 @@ function forms() {
 		request.onreadystatechange = function () {
 			if (request.readyState < 4) {
 				statusMessage1.innerHTML = message.loading;
+				setTimeout(function () {
+						statusMessage1.style.display = 'none';
+					}, 5000);
 			} else if (request.readyState === 4) {
 				if (request.status === 200 && request.status < 300) {
 					statusMessage1.innerHTML = message.success;
 					statusMessage1.style.color = '#2ecc71';
+					setTimeout(function () {
+						statusMessage1.style.display = 'none';
+					}, 5000);
 				}
 			} else {
 				statusMessage1.innerHTML = message.failure;
 				statusMessage1.style.color = '#e74c3c';
+				setTimeout(function () {
+						statusMessage1.style.display = 'none';
+					}, 5000);
 			}
 		};
 
@@ -290,14 +308,23 @@ function forms() {
 		request.onreadystatechange = function () {
 			if (request.readyState < 4) {
 				statusMessage2.innerHTML = message.loading;
+				setTimeout(function () {
+						statusMessage2.style.display = 'none';
+					}, 5000);
 			} else if (request.readyState === 4) {
 				if (request.status === 200 && request.status < 300) {
 					statusMessage2.innerHTML = message.success;
 					statusMessage2.style.color = '#2ecc71';
+					setTimeout(function () {
+						statusMessage2.style.display = 'none';
+					}, 5000);
 				}
 			} else {
 				statusMessage2.innerHTML = message.failure;
 				statusMessage2.style.color = '#e74c3c';
+				setTimeout(function () {
+						statusMessage2.style.display = 'none';
+					}, 5000);
 			}
 		};
 
