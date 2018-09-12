@@ -1754,9 +1754,12 @@ h4 {
 .realImg {
   position: absolute;
   z-index: 5;
-  display: none;
   opacity: 0;
-  transition-duration: 1s;
+  transition: 1s;
+}
+
+.realImg:hover {
+  opacity: 1;
 }
 
 .feedback-wrapper {
@@ -1799,3 +1802,4 @@ h4 {
   text-align: center;
   font-size: 25px;
 }
+

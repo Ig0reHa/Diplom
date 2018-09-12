@@ -105,7 +105,7 @@ function blockLoad() {
 		for (var i = 0; i < StylesImg.length; i++) {
 			StylesImg[i].classList.remove('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs');
 			StylesImg[i].classList.add('col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1', 'animated', 'zoomIn');
-			loadMoreBtn.remove();
+			loadMoreBtn.style.display = 'none';
 		}
 	});
 }
@@ -486,7 +486,7 @@ function modal() {
 		popupGift.classList.remove('fadeOut');
 		popupGift.style.display = 'block';
 		popupGift.classList.add('animated', 'fadeIn');
-		gift.remove();
+		gift.style.display = 'none';
 		modalIsOpen = true;
 		modalWasOpened = true;
 	});
@@ -602,7 +602,7 @@ function modal() {
 			popupGift.classList.remove('fadeOut');
 			popupGift.style.display = 'block';
 			popupGift.classList.add('animated', 'fadeIn');
-			gift.remove();
+			gift.style.display = 'block';
 			modalWasOpened = true;
 		}
 	};
