@@ -40,7 +40,7 @@ function accordion() {
 					accordionHeading[_i].classList.remove('active');
 				}
 				this.classList.add('active');
-				accordionBlock[i].classList.add('animated', 'zoomIn');
+				accordionBlock[i].classList.remove('is-paused');
 			}
 		});
 	};
@@ -602,7 +602,7 @@ function modal() {
 			popupGift.classList.remove('fadeOut');
 			popupGift.style.display = 'block';
 			popupGift.classList.add('animated', 'fadeIn');
-			gift.style.display = 'block';
+			gift.style.display = 'none';
 			modalWasOpened = true;
 		}
 	};
